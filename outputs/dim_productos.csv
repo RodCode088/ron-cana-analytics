@@ -1,0 +1,15 @@
+﻿producto_id,nombre_producto,categoria,subcategoria,precio_lista,costo_unitario,formato,años_añejamiento,descripcion,activo,margen_porcentaje,utilidad_unitaria
+RCP-BL-750,Ron Caña Blanco Artesanal,Blanco,Entry,18.0,7.5,750ml,0,Ron blanco artesanal destilado tres veces,True,58.3,10.5
+RCP-SP-750,Ron Caña Spiced,Especialidad,Entry,22.0,9.0,750ml,0,"Ron especiado con canela, vainilla y clavo",True,59.1,13.0
+RCP-A5-750,Ron Caña Añejo 5 Años,Añejo,Core,32.0,14.0,750ml,5,Añejado 5 años en barricas de roble americano,True,56.2,18.0
+RCP-A5-375,Ron Caña Añejo 5 Años,Añejo,Core,18.0,8.0,375ml,5,Media botella - Añejado 5 años,True,55.6,10.0
+RCP-A8-750,Ron Caña Añejo 8 Años,Añejo,Core,42.0,18.0,750ml,8,Añejado 8 años - Perfil complejo,True,57.1,24.0
+RCP-RE-750,Ron Caña Reserva Especial,Añejo,Core,38.0,16.5,750ml,6,Blend especial de 6 años,True,56.6,21.5
+RCP-EA12-750,Ron Caña Extra Añejo 12 Años,Extra Añejo,Premium,68.0,28.0,750ml,12,Extra añejo 12 años - Premium,True,58.8,40.0
+RCP-SO15-750,Ron Caña Solera 15 Años,Extra Añejo,Premium,85.0,36.0,750ml,15,Método Solera - 15 años,True,57.6,49.0
+RCP-SB-750,Ron Caña Single Barrel,Premium,Premium,72.0,30.0,750ml,10,Barrica única - Edición numerada,True,58.3,42.0
+RCP-EDLIM-750,Ron Caña Edición Limitada Roble Europeo,Ultra Premium,Ultra Premium,180.0,75.0,750ml,12,Edición limitada - Barricas roble europeo,True,58.3,105.0
+RCP-CASKP-750,Ron Caña Cask Finish Oporto,Ultra Premium,Ultra Premium,155.0,65.0,750ml,14,Finalizado en barricas de vino Oporto,True,58.1,90.0
+RCP-XO18-750,Ron Caña XO 18 Años,Ultra Premium,Ultra Premium,245.0,105.0,750ml,18,Extra Old - Máxima expresión,True,57.1,140.0
+RCP-KIT-DEG,Kit Degustación Premium,Gift,Gift,48.0,22.0,3x200ml,0,"Set degustación: Añejo 5, 8 y 12 años",True,54.2,26.0
+RCP-GIFT-A8,Gift Set Añejo 8 Años + 2 Copas,Gift,Gift,65.0,28.0,Set,8,Estuche regalo con botella y 2 copas premium,True,56.9,37.0

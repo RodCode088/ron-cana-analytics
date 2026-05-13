@@ -1,0 +1,101 @@
+﻿cliente_id,nombre_cliente,tipo_cliente,segmento,ciudad,rating_crediticio,frecuencia_compra,ticket_promedio_estimado,activo
+CLI-H5-001,Hotel Bristol Panamá,B2B,Hotel 5 Estrellas,Ciudad de Panamá,A+,Alta,2624,True
+CLI-H5-002,The Santa María Golf & Country Club,B2B,Hotel 5 Estrellas,Ciudad de Panamá,A+,Alta,3914,True
+CLI-H5-003,American Trade Hotel,B2B,Hotel 5 Estrellas,Ciudad de Panamá,A+,Alta,2698,True
+CLI-H5-004,Sortis Hotel & Casino,B2B,Hotel 5 Estrellas,Ciudad de Panamá,A+,Alta,2630,True
+CLI-H5-005,Dreams Delight Playa Bonita,B2B,Hotel 5 Estrellas,Ciudad de Panamá,A+,Alta,3215,True
+CLI-H5-006,Westin Playa Bonita,B2B,Hotel 5 Estrellas,Ciudad de Panamá,A+,Alta,3586,True
+CLI-H5-007,Gamboa Rainforest Resort,B2B,Hotel 5 Estrellas,Colón,A+,Alta,2773,True
+CLI-H5-008,The Haven & Spa,B2B,Hotel 5 Estrellas,Coronado,A+,Alta,3722,True
+CLI-H4-001,Hotel Central,B2B,Hotel 4 Estrellas,David,A+,Media-Alta,1860,True
+CLI-H4-002,Hotel Isla Verde,B2B,Hotel 4 Estrellas,Ciudad de Panamá,A,Media-Alta,1443,True
+CLI-H4-003,Hotel Riande Continental,B2B,Hotel 4 Estrellas,Ciudad de Panamá,A,Media-Alta,2186,True
+CLI-H4-004,Best Western Plus,B2B,Hotel 4 Estrellas,Ciudad de Panamá,A,Media-Alta,1594,True
+CLI-H4-005,Radisson Summit Golf,B2B,Hotel 4 Estrellas,Ciudad de Panamá,A,Media-Alta,1503,True
+CLI-H4-006,Hotel Milano,B2B,Hotel 4 Estrellas,Ciudad de Panamá,A,Media-Alta,1287,True
+CLI-H4-007,City of David Hotel,B2B,Hotel 4 Estrellas,David,A+,Media-Alta,1265,True
+CLI-H4-008,Hotel Castilla,B2B,Hotel 4 Estrellas,David,A,Media-Alta,1778,True
+CLI-H4-009,Hotel Santiago Plaza,B2B,Hotel 4 Estrellas,Santiago,A,Media-Alta,1593,True
+CLI-H4-010,Hotel Guayacanes,B2B,Hotel 4 Estrellas,Boquete,A,Media-Alta,2064,True
+CLI-H4-011,Hotel Hibiscus,B2B,Hotel 4 Estrellas,Chitré,A,Media-Alta,2172,True
+CLI-H4-012,Hotel Dos Mares,B2B,Hotel 4 Estrellas,Colón,A,Media-Alta,1337,True
+CLI-RG-001,Manolo Caracol,B2B,Restaurante Gourmet,Ciudad de Panamá,A,Alta,1215,True
+CLI-RG-002,Maito,B2B,Restaurante Gourmet,Ciudad de Panamá,B+,Alta,876,True
+CLI-RG-003,Donde José,B2B,Restaurante Gourmet,Ciudad de Panamá,A,Alta,869,True
+CLI-RG-004,Intimo,B2B,Restaurante Gourmet,Ciudad de Panamá,A,Alta,912,True
+CLI-RG-005,Fonda Lo Que Hay,B2B,Restaurante Gourmet,Ciudad de Panamá,B+,Alta,874,True
+CLI-RG-006,La Posta,B2B,Restaurante Gourmet,Ciudad de Panamá,A+,Alta,984,True
+CLI-RG-007,Tantalo Kitchen,B2B,Restaurante Gourmet,Ciudad de Panamá,A+,Alta,1233,True
+CLI-RG-008,Makoto,B2B,Restaurante Gourmet,Ciudad de Panamá,A+,Alta,998,True
+CLI-RG-009,Las Clementinas,B2B,Restaurante Gourmet,Ciudad de Panamá,A,Alta,1209,True
+CLI-RG-010,Azafrán,B2B,Restaurante Gourmet,David,A,Alta,1402,True
+CLI-RG-011,Restaurante Karlota,B2B,Restaurante Gourmet,Boquete,B+,Alta,1150,True
+CLI-RG-012,The Rock,B2B,Restaurante Gourmet,Boquete,B+,Alta,1366,True
+CLI-RG-013,Il Baretto,B2B,Restaurante Gourmet,Coronado,A,Alta,983,True
+CLI-RG-014,Restaurante Los Camisones,B2B,Restaurante Gourmet,Santiago,A+,Alta,1133,True
+CLI-RG-015,El Trapiche,B2B,Restaurante Gourmet,Ciudad de Panamá,B+,Alta,1353,True
+CLI-RC-001,Crepes & Waffles,B2B,Restaurante Casual Premium,Ciudad de Panamá,B+,Media,891,True
+CLI-RC-002,Madrigal,B2B,Restaurante Casual Premium,Ciudad de Panamá,B,Media,644,True
+CLI-RC-003,Mercado de Mariscos,B2B,Restaurante Casual Premium,Ciudad de Panamá,A,Media,738,True
+CLI-RC-004,Parrillada Gaucha,B2B,Restaurante Casual Premium,Ciudad de Panamá,B,Media,727,True
+CLI-RC-005,Beirut,B2B,Restaurante Casual Premium,Ciudad de Panamá,B+,Media,797,True
+CLI-RC-006,Napoli Pizza,B2B,Restaurante Casual Premium,David,B+,Media,420,True
+CLI-RC-007,Restaurante El Ancla,B2B,Restaurante Casual Premium,Colón,B+,Media,701,True
+CLI-RC-008,Restaurante Mirador,B2B,Restaurante Casual Premium,Santiago,B,Media,541,True
+CLI-RC-009,Big Daddy,B2B,Restaurante Casual Premium,Boquete,A,Media,480,True
+CLI-RC-010,La Vespa,B2B,Restaurante Casual Premium,Coronado,B,Media,530,True
+CLI-BAR-001,Pedro Mandinga Rum Bar,B2B,Bar Top,Ciudad de Panamá,A,Alta,604,True
+CLI-BAR-002,La Rana Dorada,B2B,Bar Top,Ciudad de Panamá,B+,Alta,965,True
+CLI-BAR-003,Istmo Brew Pub,B2B,Bar Top,Ciudad de Panamá,B+,Alta,744,True
+CLI-BAR-004,Unplugged,B2B,Bar Top,Ciudad de Panamá,B+,Alta,730,True
+CLI-BAR-005,Lounge Bar Raices,B2B,Bar Top,Ciudad de Panamá,B+,Alta,979,True
+CLI-BAR-006,Barlovento,B2B,Bar Top,Bocas del Toro,B+,Alta,1025,True
+CLI-BAR-007,Zanzibar,B2B,Bar Top,Bocas del Toro,B+,Alta,792,True
+CLI-BAR-008,Casa Brewing Co,B2B,Bar Top,David,A,Alta,882,True
+CLI-SUP-001,Super 99 Central,B2B,Supermercado,Ciudad de Panamá,A+,Alta,7216,True
+CLI-SUP-002,Rey Multiplaza,B2B,Supermercado,Ciudad de Panamá,A+,Alta,9517,True
+CLI-SUP-003,Riba Smith Paitilla,B2B,Supermercado,Ciudad de Panamá,A+,Alta,6798,True
+CLI-SUP-004,Super 99 David,B2B,Supermercado,David,A+,Alta,8119,True
+CLI-SUP-005,El Machetazo Colón,B2B,Supermercado,Colón,A+,Alta,8884,True
+CLI-SUP-006,Super Centro Santiago,B2B,Supermercado,Santiago,A+,Alta,9630,True
+CLI-LIC-001,La Europea Premium,B2B,Licorería Especializada,Ciudad de Panamá,A,Media-Alta,2475,True
+CLI-LIC-002,The Wine Bar,B2B,Licorería Especializada,Ciudad de Panamá,A,Media-Alta,2724,True
+CLI-LIC-003,Licores y Vinos PTY,B2B,Licorería Especializada,Ciudad de Panamá,A,Media-Alta,1557,True
+CLI-LIC-004,Vinoteca 507,B2B,Licorería Especializada,Ciudad de Panamá,B+,Media-Alta,1533,True
+CLI-LIC-005,Licorería Premium Costa del Este,B2B,Licorería Especializada,Ciudad de Panamá,B+,Media-Alta,2734,True
+CLI-LIC-006,El Bodegón,B2B,Licorería Especializada,Ciudad de Panamá,A,Media-Alta,1705,True
+CLI-LIC-007,Licorería El Padrino,B2B,Licorería Especializada,David,A,Media-Alta,1544,True
+CLI-LIC-008,Licores Premium David,B2B,Licorería Especializada,David,A,Media-Alta,1779,True
+CLI-LIC-009,Licorería Central Colón,B2B,Licorería Especializada,Colón,B+,Media-Alta,1650,True
+CLI-LIC-010,Licorería La Bodega,B2B,Licorería Especializada,Santiago,A,Media-Alta,2602,True
+CLI-LIC-011,Vinos y Licores Chitré,B2B,Licorería Especializada,Chitré,A,Media-Alta,1604,True
+CLI-LIC-012,Licorería Penonomé,B2B,Licorería Especializada,Penonomé,A,Media-Alta,2738,True
+CLI-CONV-001,Delta Vía España,B2B,Tienda Conveniencia,Ciudad de Panamá,A,Media,342,True
+CLI-CONV-002,Delta Costa del Este,B2B,Tienda Conveniencia,Ciudad de Panamá,B+,Media,343,True
+CLI-CONV-003,7-Eleven Albrook,B2B,Tienda Conveniencia,Ciudad de Panamá,B+,Media,396,True
+CLI-CONV-004,Delta David,B2B,Tienda Conveniencia,David,B,Media,465,True
+CLI-CONV-005,Minisuper Express Colón,B2B,Tienda Conveniencia,Colón,A,Media,623,True
+CLI-DIST-001,Distribuidora Melo,B2B,Distribuidor Mayorista,Colón,A+,Baja,12431,True
+CLI-DIST-002,Distribuciones Chiriquí,B2B,Distribuidor Mayorista,David,A+,Baja,17107,True
+CLI-DIST-003,Distribuidora Central PTY,B2B,Distribuidor Mayorista,Ciudad de Panamá,A+,Baja,19719,True
+CLI-CORP-001,Cable & Wireless Panamá,B2B,Corporativo,Ciudad de Panamá,A+,Baja,5173,True
+CLI-CORP-002,Copa Airlines,B2B,Corporativo,Ciudad de Panamá,A+,Baja,4978,True
+CLI-CORP-003,Banco General,B2B,Corporativo,Ciudad de Panamá,A+,Baja,3909,True
+CLI-CORP-004,ASSA Compañía de Seguros,B2B,Corporativo,Ciudad de Panamá,A+,Baja,3785,True
+CLI-CORP-005,Grupo Melo,B2B,Corporativo,Colón,A+,Baja,3664,True
+CLI-CORP-006,Cervecería Nacional,B2B,Corporativo,Ciudad de Panamá,A+,Baja,3578,True
+CLI-FINAL-001,Juan Pérez,B2C,Consumidor Final,Ciudad de Panamá,B+,Baja,193,True
+CLI-FINAL-002,María González,B2C,Consumidor Final,Ciudad de Panamá,B,Baja,132,True
+CLI-FINAL-003,Carlos Rodríguez,B2C,Consumidor Final,Ciudad de Panamá,C,Baja,81,True
+CLI-FINAL-004,Ana Martínez,B2C,Consumidor Final,Ciudad de Panamá,B+,Baja,107,True
+CLI-FINAL-005,Roberto Chen,B2C,Consumidor Final,Ciudad de Panamá,B+,Baja,68,True
+CLI-FINAL-006,Laura Sánchez,B2C,Consumidor Final,Ciudad de Panamá,C,Baja,168,True
+CLI-FINAL-007,Diego Morales,B2C,Consumidor Final,Ciudad de Panamá,A,Baja,135,True
+CLI-FINAL-008,Sofía Vargas,B2C,Consumidor Final,Ciudad de Panamá,B,Baja,139,True
+CLI-FINAL-009,Andrés Castro,B2C,Consumidor Final,Ciudad de Panamá,C,Baja,69,True
+CLI-FINAL-010,Valentina Díaz,B2C,Consumidor Final,Ciudad de Panamá,B+,Baja,103,True
+CLI-FINAL-011,Fernando Ortiz,B2C,Consumidor Final,David,B,Baja,189,True
+CLI-FINAL-012,Camila Torres,B2C,Consumidor Final,David,C,Baja,125,True
+CLI-FINAL-013,Luis Herrera,B2C,Consumidor Final,Coronado,B+,Baja,168,True
+CLI-FINAL-014,Isabella Ramírez,B2C,Consumidor Final,Boquete,B,Baja,194,True
+CLI-FINAL-015,Gabriel Flores,B2C,Consumidor Final,Colón,A,Baja,131,True

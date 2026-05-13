@@ -1,0 +1,11 @@
+﻿evento_id,nombre,fecha_inicio,fecha_fin,tipo,impacto_ventas,productos_foco,canales_aplicables,descuento_adicional,descripcion,duracion_dias
+EVT-001,Lanzamiento Cask Finish Oporto,2024-01-20,2024-01-27,Lanzamiento Producto,1.8,RCP-CASKP-750,"Horeca Premium,Ecommerce",0,Lanzamiento de nueva edición Cask Finish,8
+EVT-002,San Valentín - Gifts,2024-02-10,2024-02-14,Campaña Estacional,1.5,"RCP-GIFT-A8,RCP-KIT-DEG","Ecommerce,Retail Moderno",10,Promoción especial regalos San Valentín,5
+EVT-003,Feria del Ron Panamá 2024,2024-03-22,2024-03-24,Evento Industria,2.8,"RCP-EDLIM-750,RCP-KIT-DEG,RCP-XO18-750","Ecommerce,Duty Free",0,Participación en feria nacional del ron,3
+EVT-004,Semana Santa,2024-03-25,2024-03-31,Campaña Estacional,1.4,"RCP-A5-750,RCP-A8-750","Retail Moderno,Supermercados",15,Promoción Semana Santa,7
+EVT-005,Día del Padre,2024-06-10,2024-06-16,Campaña Estacional,2.1,"RCP-GIFT-A8,RCP-EA12-750,RCP-SB-750","Ecommerce,Retail Moderno,Supermercados",12,Campaña especial Día del Padre,7
+EVT-006,Aniversario Ron Caña (6 años),2024-08-15,2024-08-18,Evento Marca,1.7,RCP-EDLIM-750,"Ecommerce,Horeca Premium",0,Celebración aniversario de la marca,4
+EVT-007,Fiestas Patrias,2024-10-28,2024-11-03,Campaña Patriótica,1.6,"RCP-A8-750,RCP-RE-750","Retail Moderno,Supermercados",10,Promoción fiestas patrias de Panamá,7
+EVT-008,Black Friday,2024-11-29,2024-12-01,Promoción,3.5,"RCP-A5-750,RCP-A8-750,RCP-KIT-DEG","Ecommerce,Retail Moderno",25,Black Friday - descuentos agresivos,3
+EVT-009,Regalos Corporativos Navidad,2024-12-01,2024-12-15,B2B Corporativo,2.4,"RCP-GIFT-A8,RCP-EDLIM-750,RCP-SO15-750",Corporativo,8,Campaña regalos corporativos fin de año,15
+EVT-010,Temporada Navideña,2024-12-15,2024-12-31,Campaña Estacional,2.2,"RCP-GIFT-A8,RCP-A8-750,RCP-EA12-750","Ecommerce,Retail Moderno,Supermercados,Horeca Premium",12,Temporada navideña general,17

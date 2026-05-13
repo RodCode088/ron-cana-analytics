@@ -53,7 +53,7 @@ Power BI Desktop (DAX, Modelado dimensional)
 
 ## Autor
 
-Rodolfo Usuriaga
+Rodolfo Alabarca
 cat > README.md << 'EOF'
 #Análisis de Ventas - Ron Caña Panamá 2024
 

@@ -1,135 +1,139 @@
-# Análisis de Ventas - Ron Caña Panamá 2024
+# Ron Caña Analytics Lab
 
-Proyecto de Data Analytics end-to-end: generación de datos sintéticos, análisis exploratorio y visualización ejecutiva para una destilería premium ficticia en Panamá.
+Una clase interactiva de analytics engineering construida sobre datos sintéticos de una marca ficticia de ron premium. La interfaz reproduce la lógica visual de un reporte de Power BI y permite recorrer el dato desde el KPI hasta el modelo, el registro y el código que lo calcula.
 
-## Objetivo
+## Qué se puede hacer
 
-Desarrollar un análisis completo de ventas demostrando habilidades en:
-- Generación de datasets realistas con Python
-- Análisis exploratorio de datos
-- Modelado dimensional
-- Visualización ejecutiva en Power BI
-- Storytelling con datos
+- Explorar KPIs, tendencias, canales, productos, clientes y un mapa de Panamá.
+- Filtrar todo el reporte desde visuales, mapa o panel lateral.
+- Navegar un modelo estrella con `fact_ventas`, `dim_productos`, `dim_clientes` y `dim_eventos`.
+- Inspeccionar registros, buscar y cambiar de tabla.
+- Leer fragmentos reales del pipeline Python y de la Function que integra Gemini.
+- Seguir una clase guiada de ocho lecciones.
+- Preguntar al tutor AI; puede explicar, resaltar y mover la interfaz con acciones validadas.
+- Generar entre 500 y 20.000 transacciones reproducibles mediante una semilla.
+- Importar un CSV sintético compatible sin enviar sus filas al servidor ni a Gemini.
+- Continuar usando el recorrido local si Gemini no está configurado o no responde.
 
-## Estructura del Proyecto
-proyecto_ron_premium/
-├── data_generation/
-│   ├── config.py
-│   ├── dim_productos.py
-│   ├── dim_clientes.py
-│   ├── eventos_comerciales.py
-│   └── generador_ventas.py
-├── outputs/
-│   ├── dim_productos.csv
-│   ├── dim_clientes.csv
-│   ├── eventos_comerciales.csv
-│   └── ventas_transacciones.csv
-├── analysis/
-│   ├── analisis_exploratorio.py
-│   └── calcular_insights.py
-├── app.py
-└── README.md
-## Contexto del Negocio
+## Arquitectura
 
-**Empresa:** Ron Caña Panamá  
-**Fundación:** 2018  
-**Sector:** Destilería de licores premium  
-
-**Segmento Objetivo:** Adultos 27-55 años, NSE A/B, conocedores de licores premium
-
-## Dataset Generado
-
-- 4,234 transacciones del año 2024
-- 14 productos con pricing realista
-- 80 clientes segmentados B2B y B2C
-- 10 campañas comerciales
-- 9 ciudades de Panamá
-
-## Insights Principales
-
-**Estacionalidad**  
-Diciembre concentra 24.8% del ingreso anual - oportunidad de suavizar estacionalidad con campañas Q1-Q2
-
-**Productos Premium**  
-Edición Limitada: 10.5% de unidades pero 32% de ingresos - ratio 3.1x más ingreso por unidad
-
-**Rentabilidad por Canal**  
-Horeca Premium: Margen 54.7%  
-Supermercados: Margen 53.5%
-
-**Segmentación**  
-B2B: 98.3% del ingreso  
-B2C: 1.7% del ingreso - canal subexplotado
-
-**Efectividad de Campañas**  
-Incremento de ticket promedio: +39.7% - ROI positivo
-
-## Tecnologías
-
-- Python 3.10+ (pandas, numpy, datetime)
-- Power BI Desktop (Modelado dimensional, DAX)
-- Streamlit (Dashboard web interactivo)
-- Plotly (Visualizaciones interactivas)
-- Git & GitHub
-
-## Reproducir
-
-**Requisitos:**
-```bash
-pip install pandas numpy streamlit plotly
+```text
+CSV sintéticos ──> validación Python ──> data product JSON
+                                              │
+                                              v
+                                  Vite + Chart.js + Leaflet
+                                   │       │        │
+                                   │       │        └─ mapa OpenStreetMap
+                                   │       └─ visuales y filtros cruzados
+                                   └─ modelo, datos, código y laboratorio
+                                              │
+                                contexto agregado y sin filas
+                                              v
+                              Cloudflare Pages Function /api/tutor
+                                              │
+                              acciones cerradas y validadas
+                                              v
+                                   Gemini 3.7 Flash (opcional)
 ```
 
-**Generar Datasets:**
-```bash
-python data_generation/dim_productos.py
-python data_generation/dim_clientes.py
-python data_generation/eventos_comerciales.py
-python data_generation/generador_ventas.py
+El navegador conserva los datasets importados o generados. El tutor recibe únicamente un contexto agregado: KPIs, filtros, rankings compactos, vista activa y lección actual. Las acciones generadas por el modelo pasan por una lista permitida tanto en el servidor como en el cliente; el modelo no ejecuta JavaScript ni modifica datos arbitrariamente.
+
+## Ejecutar el proyecto
+
+Requisitos: Python 3.11 o posterior y Node.js 20 o posterior.
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt -r requirements-dev.txt
+python scripts/build_dashboard_data.py
+
+Set-Location web
+npm install
+npm run dev
 ```
 
-**Análisis:**
-```bash
-python analysis/analisis_exploratorio.py
-python analysis/calcular_insights.py
+La aplicación se abre normalmente en `http://localhost:5173`. En desarrollo Vite no ejecuta Pages Functions, por lo que el tutor usa automáticamente el recorrido determinístico local.
+
+Para probar la aplicación completa con la Function local:
+
+```powershell
+Set-Location web
+npm run build
+Set-Location ..
+npx wrangler pages dev web/dist
 ```
 
-**Ejecutar Demo Web:**
-```bash
-streamlit run app.py
+Guarda la clave solo en `.dev.vars` para desarrollo local:
+
+```dotenv
+GEMINI_API_KEY=tu_clave_de_google_ai_studio
 ```
 
-## Dashboard en Power BI
+No confirmes ni subas ese archivo al repositorio.
 
-1. Abrir Power BI Desktop
-2. Importar CSV de outputs/
-3. Crear relaciones (esquema estrella)
-4. Construir visualizaciones
+## Contrato para importar CSV
 
-## Demo Web Interactiva
+La plantilla está en `web/public/data/plantilla_ventas.csv`. Las columnas mínimas son:
 
-Dashboard interactivo con filtros en tiempo real:
+```text
+fecha,ciudad,canal_venta,tipo_cliente,nombre_producto,cantidad,ingreso_total,utilidad_bruta
+```
 
-**[Ver Demo en Vivo](https://ron-cana-analytics-sn4ycdsnuse6vw2o7rryxw.streamlit.app/)**
+También se aceptan opcionalmente `segmento_cliente`, `cliente_id`, `producto_id`, `categoria_producto`, `descuento_porcentaje`, `devolucion`, `evento_id` y `campana`.
 
-Características:
-- Filtros dinámicos por mes, canal y ciudad
-- KPIs que se actualizan en tiempo real
-- Gráficos interactivos con Plotly
-- Mapa geográfico de distribución de ventas
-- Análisis comparativo de canales y productos
+El importador descarta filas con fecha o métricas inválidas y nunca sobrescribe los CSV originales. Si una ciudad importada no pertenece al catálogo geográfico de la demo, participa en KPIs y gráficos, pero no aparece como burbuja en el mapa.
 
-## Habilidades Demostradas
+## Calidad y pruebas
 
-**Técnicas:**  
-Python, pandas, numpy, Generación de datos sintéticos, Modelado dimensional, Power BI, DAX, Streamlit, Plotly, Git & GitHub
+```powershell
+python -m pytest -q
 
-**De Negocio:**  
-Pricing strategy, Análisis de rentabilidad, Segmentación de clientes, Storytelling con datos
+Set-Location web
+npm test
+npm run build
 
-## Autor
+Set-Location ..\functions
+npm test
+```
 
-**Rodolfo Alabarca**  
-Data Analyst | Business Intelligence
+Las pruebas cubren reglas del generador, integridad referencial, métricas, filtros, laboratorio CSV, generación reproducible, contrato privado del tutor y validación de acciones AI. El workflow de GitHub Actions repite generación, pruebas y build en cada cambio.
 
-[LinkedIn](https://www.linkedin.com/posts/rodolfo-alabarca-16b187239_dataanalytics-powerbi-python-share-7460153616096636928-fg5Z?utm_source=share&utm_medium=member_desktop&rcm=ACoAADtK1CMB-lBQ0mC2JiYVXMyVj-sVjdIvaes) | [GitHub](https://github.com/RodCode088)
+## Desplegar en Cloudflare Pages
 
+1. Crea una clave en Google AI Studio. No la pongas en código ni en variables `VITE_*`.
+2. Autentica Wrangler con tu cuenta de Cloudflare.
+3. Construye el data product y la web.
+4. Crea el proyecto de Pages y configura `GEMINI_API_KEY` como secreto de producción.
+5. Despliega `web/dist`; la carpeta `functions/` se publica como Pages Functions.
+
+```powershell
+python scripts/build_dashboard_data.py
+Set-Location web
+npm ci
+npm run build
+Set-Location ..
+
+npx wrangler pages project create ron-cana-intelligence
+npx wrangler pages secret put GEMINI_API_KEY --project-name ron-cana-intelligence
+npx wrangler pages deploy web/dist --project-name ron-cana-intelligence
+```
+
+Como control opcional de abuso, crea un namespace KV y enlázalo a la Function con el nombre `TUTOR_LIMIT`. El límite incluido es orientativo y no sustituye un rate limiter atómico para producción.
+
+## Nota sobre Gemini gratuito
+
+La demo funciona sin Gemini gracias al tutor guiado local. Al activar el nivel gratuito, Google puede usar el contenido procesado para mejorar sus productos; por eso esta implementación envía solo agregados y debe utilizarse con datos sintéticos o no sensibles. Los límites dependen del proyecto y del modelo y deben revisarse en Google AI Studio antes de una demostración pública.
+
+## Estructura principal
+
+```text
+analysis/metrics.py                 contrato, calidad, KPIs e insights
+data_generation/                   dimensiones y generador transaccional
+scripts/build_dashboard_data.py    construcción del data product web
+web/                               interfaz Vite estilo Power BI
+functions/api/tutor.js             tutor Gemini para Cloudflare Pages
+tests/                              pruebas Python
+Dashboard_Ron_cana.pblx.pbix       reporte original de referencia
+wrangler.jsonc                      configuración de Cloudflare Pages
+```

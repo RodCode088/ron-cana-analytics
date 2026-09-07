@@ -1,7 +1,12 @@
 # dim_productos.py
 # Genera el catálogo de productos de Ron Caña Panamá
 
+import sys
+
 import pandas as pd
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 def crear_catalogo_productos():
     """

@@ -1,8 +1,12 @@
 # eventos_comerciales.py
 # Define las campañas y eventos comerciales de 2024
 
+import sys
+
 import pandas as pd
-from datetime import datetime
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 def crear_eventos_comerciales():
     """

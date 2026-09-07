@@ -1,0 +1,21 @@
+{
+  "name": "ron-cana-intelligence-web",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "chart.js": "^4.5.0",
+    "leaflet": "^1.9.4",
+    "papaparse": "^5.5.3"
+  },
+  "devDependencies": {
+    "vite": "^7.1.0",
+    "vitest": "^3.2.0"
+  }
+}

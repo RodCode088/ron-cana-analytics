@@ -1,0 +1,4 @@
+fecha,ciudad,canal_venta,tipo_cliente,nombre_producto,cantidad,ingreso_total,utilidad_bruta
+2024-01-15,Ciudad de Panamá,Supermercados,B2B,Ron Caña Añejo 8 Años,24,1008,576
+2024-01-18,David,Ecommerce,B2C,Ron Caña Blanco Artesanal,2,36,21
+2024-02-10,Colón,Horeca Premium,B2B,Ron Caña Extra Añejo 12 Años,12,756,420

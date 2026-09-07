@@ -1,15 +1,25 @@
 # dim_clientes.py
 # Genera la base de clientes de Ron Caña Panamá
 
-import pandas as pd
 import random
-from config import CIUDADES
+import sys
+
+import pandas as pd
+
+try:
+    from .config import CIUDADES, RANDOM_SEED
+except ImportError:  # Permite ejecutar el archivo directamente.
+    from config import CIUDADES, RANDOM_SEED
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 def crear_base_clientes():
     """
-    Crea la base de 80 clientes distribuidos por tipo y geografía
+    Crea la base de 100 clientes distribuidos por tipo y geografía.
     """
     
+    random.seed(RANDOM_SEED)
     clientes = []
     
     # ============================================

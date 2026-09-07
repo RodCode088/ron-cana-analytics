@@ -1,7 +1,12 @@
 # calcular_insights.py
 # Calcula los insights clave para el Insight Box
 
+import sys
+
 import pandas as pd
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 print("="*70)
 print("🔍 CALCULANDO INSIGHTS CLAVE")
@@ -127,8 +132,8 @@ print(f"""
 4. B2B representa {porcentaje_b2b:.0f}% del ingreso total
    → Potencial: Canal B2C está subexplotado
 
-5. Campañas incrementan ticket promedio {incremento_ticket:.0f}%
-   → ROI positivo - continuar estrategia promocional
+5. El ticket durante campañas es {incremento_ticket:.0f}% mayor en el dataset
+   → Asociación descriptiva; no prueba causalidad ni ROI sin costes y grupo de control
 """)
 
-print("="*70) 
+print("="*70)

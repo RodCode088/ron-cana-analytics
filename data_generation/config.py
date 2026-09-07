@@ -16,6 +16,7 @@ EMPRESA = {
 FECHA_INICIO = datetime(2024, 1, 1)
 FECHA_FIN = datetime(2024, 12, 31)
 NUM_TRANSACCIONES_OBJETIVO = 4200
+RANDOM_SEED = 2024
 
 #=====================================================
 #ESTACIONALIDAD - Patrones de Ventas

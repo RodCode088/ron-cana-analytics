@@ -1,7 +1,12 @@
+from pathlib import Path
+
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import plotly.graph_objects as go
+
+from analysis.metrics import compute_dynamic_insights, compute_kpis
+
+PROJECT_ROOT = Path(__file__).resolve().parent
 
 # Configuración de la página
 st.set_page_config(
@@ -37,7 +42,7 @@ st.markdown("---")
 # Cargar datos
 @st.cache_data
 def load_data():
-    ventas = pd.read_csv('outputs/ventas_transacciones.csv')
+    ventas = pd.read_csv(PROJECT_ROOT / 'outputs' / 'ventas_transacciones.csv')
     ventas['fecha'] = pd.to_datetime(ventas['fecha'])
     return ventas
 
@@ -84,24 +89,26 @@ df_filtrado = ventas[
     (ventas['ciudad'].isin(ciudades))
 ]
 
+if df_filtrado.empty:
+    st.warning("No hay transacciones para la combinación de filtros seleccionada.")
+    st.stop()
+
+kpis = compute_kpis(df_filtrado)
+
 # KPIs
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-    ingreso_total = df_filtrado['ingreso_total'].sum()
-    st.metric("Ingreso Total", f"${ingreso_total/1e6:.2f}M")
+    st.metric("Ingreso Total", f"${kpis['revenue']/1e6:.2f}M")
 
 with col2:
-    utilidad_total = df_filtrado['utilidad_bruta'].sum()
-    st.metric("Utilidad Bruta", f"${utilidad_total/1e6:.2f}M")
+    st.metric("Utilidad Bruta", f"${kpis['gross_profit']/1e6:.2f}M")
 
 with col3:
-    transacciones = len(df_filtrado)
-    st.metric("Total Transacciones", f"{transacciones:,}")
+    st.metric("Total Transacciones", f"{kpis['transactions']:,}")
 
 with col4:
-    ticket_promedio = df_filtrado['ingreso_total'].mean()
-    st.metric("Ticket Promedio", f"${ticket_promedio:,.0f}")
+    st.metric("Ticket Promedio", f"${kpis['average_ticket']:,.0f}")
 
 st.markdown("---")
 
@@ -189,15 +196,10 @@ with col5:
 st.markdown("---")
 st.subheader("Insights Clave")
 
-insights = f"""
-- **Diciembre concentra 25% del ingreso anual** - Oportunidad de suavizar estacionalidad con campañas Q1-Q2
-- **Edición Limitada: 10.5% de unidades pero 32% de ingresos** - Ratio 3.1x más ingreso por unidad
-- **Horeca Premium: Margen 54.7%** vs Supermercados 53.5% - Priorizar canal Horeca
-- **B2B representa 98.3% del ingreso** - Canal B2C subexplotado
-- **Campañas incrementan ticket promedio 40%** - ROI positivo
-"""
+for insight in compute_dynamic_insights(df_filtrado):
+    st.markdown(f"- **{insight['title']}:** {insight['finding']}")
 
-st.markdown(insights)
+st.caption("Datos sintéticos. Los resultados de campaña son descriptivos y no demuestran causalidad ni ROI.")
 
 # Footer
 st.markdown("---")

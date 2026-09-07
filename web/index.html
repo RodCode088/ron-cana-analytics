@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Clase interactiva de Data Analytics y AI Engineering con datos sintéticos." />
+    <meta name="theme-color" content="#202020" />
+    <title>Ron Caña · Analytics Learning Lab</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace">Ir al contenido</a>
+    <header class="app-header">
+      <div class="app-brand"><span class="brand-tile">RC</span><strong>Ron Caña Analytics Lab</strong><span class="workspace-name">Clase interactiva</span></div>
+      <div class="header-actions">
+        <span class="dataset-badge" id="datasetBadge"><i></i> Cargando datos</span>
+        <button class="header-button" id="startTourButton" type="button">▶ Iniciar recorrido</button>
+        <button class="header-button primary" id="toggleTutorButton" type="button">✦ Tutor AI</button>
+      </div>
+    </header>
+
+    <div class="app-layout">
+      <nav class="rail" aria-label="Vistas del laboratorio">
+        <button class="rail-button active" data-view="dashboard" type="button"><span>▦</span><small>Reporte</small></button>
+        <button class="rail-button" data-view="model" type="button"><span>⌘</span><small>Modelo</small></button>
+        <button class="rail-button" data-view="data" type="button"><span>▤</span><small>Datos</small></button>
+        <button class="rail-button" data-view="code" type="button"><span>&lt;/&gt;</span><small>Código</small></button>
+        <button class="rail-button" data-view="lab" type="button"><span>⚗</span><small>Lab</small></button>
+      </nav>
+
+      <main id="workspace" class="workspace">
+        <section class="view active" data-page="dashboard">
+          <div class="page-title-row">
+            <div><h1>Resumen ejecutivo de ventas</h1><p>Selecciona visuales y filtros para explorar el contexto.</p></div>
+            <span class="view-status" id="selectionSummary">—</span>
+          </div>
+
+          <section class="kpi-grid tour-target" data-tour-target="kpis" aria-label="Indicadores clave">
+            <article class="kpi"><span>Ingreso total</span><strong id="revenueKpi">—</strong><small id="revenueDelta">—</small></article>
+            <article class="kpi"><span>Utilidad bruta</span><strong id="profitKpi">—</strong><small id="profitDelta">—</small></article>
+            <article class="kpi"><span>Margen ponderado</span><strong id="marginKpi">—</strong><small>Utilidad / ingreso</small></article>
+            <article class="kpi"><span>Transacciones</span><strong id="transactionsKpi">—</strong><small id="unitsKpi">—</small></article>
+            <article class="kpi accent"><span>Ticket promedio</span><strong id="ticketKpi">—</strong><small>Ingreso / transacción</small></article>
+          </section>
+
+          <section class="report-grid">
+            <article class="visual-card wide tour-target" data-tour-target="trend">
+              <div class="visual-title"><div><h2>Ingreso mensual</h2><p>Evolución temporal del contexto filtrado</p></div><span>USD</span></div>
+              <div class="chart-box"><canvas id="trendChart"></canvas></div>
+            </article>
+            <article class="visual-card tour-target" data-tour-target="channel">
+              <div class="visual-title"><div><h2>Ingreso por canal</h2><p>Haz clic para filtrar</p></div></div>
+              <div class="chart-box"><canvas id="channelChart"></canvas></div>
+            </article>
+            <article class="visual-card tour-target" data-tour-target="products">
+              <div class="visual-title"><div><h2>Top productos</h2><p>Participación por ingreso</p></div></div>
+              <div class="chart-box tall"><canvas id="productChart"></canvas></div>
+            </article>
+            <article class="visual-card wide map-card tour-target" data-tour-target="map">
+              <div class="visual-title"><div><h2>Ventas por zona</h2><p>Mapa interactivo de ciudades de Panamá</p></div><span>Tamaño = ingreso</span></div>
+              <div id="map" role="img" aria-label="Mapa de ventas por ciudad"></div>
+            </article>
+            <article class="visual-card">
+              <div class="visual-title"><div><h2>Composición B2B / B2C</h2><p>Ingreso por tipo de cliente</p></div></div>
+              <div class="chart-box"><canvas id="clientChart"></canvas></div>
+            </article>
+          </section>
+        </section>
+
+        <section class="view" data-page="model">
+          <div class="page-title-row"><div><h1>Modelo relacional</h1><p>Esquema estrella que alimenta el reporte.</p></div><span class="view-status">1 tabla de hechos · 3 dimensiones</span></div>
+          <div class="model-layout tour-target" data-tour-target="model">
+            <div class="model-canvas" id="modelCanvas" aria-label="Diagrama de relaciones"></div>
+            <aside class="model-detail" id="modelDetail"><h2>Selecciona una tabla</h2><p>Verás sus claves, columnas y función dentro del modelo.</p></aside>
+          </div>
+        </section>
+
+        <section class="view" data-page="data">
+          <div class="page-title-row"><div><h1>Explorador de datos</h1><p>Inspecciona tablas, tipos y registros del modelo.</p></div><span class="view-status" id="dataQualityBadge">Contrato pendiente</span></div>
+          <div class="data-panel tour-target" data-tour-target="data-grid">
+            <div class="data-toolbar">
+              <label>Tabla<select id="tableSelect"></select></label>
+              <label>Buscar<input id="tableSearch" type="search" placeholder="Filtrar registros…" /></label>
+              <span id="tableCount">—</span>
+            </div>
+            <div class="table-scroll"><table id="dataTable"></table></div>
+            <div class="pagination"><button id="prevPage" type="button">Anterior</button><span id="pageStatus">—</span><button id="nextPage" type="button">Siguiente</button></div>
+          </div>
+        </section>
+
+        <section class="view" data-page="code">
+          <div class="page-title-row"><div><h1>Código detrás del reporte</h1><p>Fragmentos reales del pipeline y la capa AI.</p></div><span class="view-status">Python + JavaScript</span></div>
+          <div class="code-layout tour-target" data-tour-target="code-viewer">
+            <aside class="code-files" id="codeFiles"></aside>
+            <section class="code-pane">
+              <div class="code-header"><div><strong id="codeTitle">—</strong><span id="codePath">—</span></div><button id="copyCode" type="button">Copiar</button></div>
+              <div class="code-lesson" id="codeLesson"></div>
+              <pre><code id="codeContent"></code></pre>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" data-page="lab">
+          <div class="page-title-row"><div><h1>Laboratorio de datos sintéticos</h1><p>Cambia el experimento sin tocar los archivos originales.</p></div><span class="view-status">Procesamiento local</span></div>
+          <div class="lab-grid tour-target" data-tour-target="lab">
+            <article class="lab-card">
+              <span class="step-label">Opción A</span><h2>Generar una nueva muestra</h2><p>Usa una semilla para obtener el mismo resultado cada vez.</p>
+              <label>Número de transacciones <output id="rowCountOutput">5.000</output><input id="rowCountInput" type="range" min="500" max="20000" step="500" value="5000" /></label>
+              <label>Semilla<input id="seedInput" type="number" value="2024" min="1" max="999999" /></label>
+              <button class="action-button" id="generateDataButton" type="button">Generar y analizar</button>
+            </article>
+            <article class="lab-card">
+              <span class="step-label">Opción B</span><h2>Cargar un CSV sintético</h2><p>El archivo se analiza en este navegador y sus filas no se envían a Gemini.</p>
+              <label class="dropzone" for="csvInput"><strong>Seleccionar archivo CSV</strong><span>Máximo recomendado: 25.000 filas</span><input id="csvInput" type="file" accept=".csv,text/csv" /></label>
+              <a class="template-link" href="/data/plantilla_ventas.csv" download>Descargar plantilla compatible</a>
+              <div class="lab-status" id="labStatus">Usando dataset original.</div>
+            </article>
+            <article class="lab-card schema-card">
+              <span class="step-label">Contrato mínimo</span><h2>Columnas requeridas</h2><div class="field-list" id="requiredFields"></div>
+              <button class="secondary-button" id="restoreDataButton" type="button">Restaurar demo original</button>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <aside class="filters-pane tour-target" data-tour-target="filters" aria-label="Panel de filtros">
+        <div class="pane-title"><strong>Filtros</strong><button id="resetFilters" type="button" aria-label="Restablecer filtros">↺</button></div>
+        <label>Mes desde<select id="monthFrom"></select></label>
+        <label>Mes hasta<select id="monthTo"></select></label>
+        <label>Canal<select id="channelFilter"></select></label>
+        <label>Ciudad<select id="cityFilter"></select></label>
+        <label>Tipo de cliente<select id="clientFilter"></select></label>
+        <div class="filter-context"><strong>Contexto activo</strong><span id="filterContext">Todos los datos</span></div>
+        <div class="trust-box"><strong>Datos sintéticos</strong><span>Las campañas son asociación, no causalidad ni ROI.</span></div>
+      </aside>
+    </div>
+
+    <aside class="tutor-panel tour-target" data-tour-target="tutor" id="tutorPanel" aria-label="Tutor AI">
+      <header><div><span class="ai-dot">✦</span><div><strong>Tutor de Analytics</strong><small id="tutorMode">Modo guiado local</small></div></div><button id="closeTutor" type="button" aria-label="Cerrar tutor">×</button></header>
+      <div class="course-progress"><span id="lessonCounter">Lección 1 de 8</span><progress id="lessonProgress" max="8" value="1"></progress></div>
+      <section class="lesson-card"><span>RECORRIDO GUIADO</span><h2 id="lessonTitle">—</h2><p id="lessonBody">—</p><div class="lesson-actions"><button id="previousLesson" type="button">Atrás</button><button id="nextLesson" type="button">Siguiente</button></div></section>
+      <div class="chat" id="chatMessages" aria-live="polite"></div>
+      <div class="quick-questions" id="quickQuestions"></div>
+      <form id="tutorForm"><label class="sr-only" for="tutorQuestion">Pregunta al tutor</label><textarea id="tutorQuestion" rows="2" maxlength="500" placeholder="Pregunta sobre los datos, el código o el modelo…"></textarea><button id="askTutor" type="submit">Enviar</button></form>
+      <footer><span>Gemini Free Tier · solo recibe agregados</span><span id="tutorRequestId"></span></footer>
+    </aside>
+
+    <div class="tour-popover" id="tourPopover" hidden><span id="tourStep">—</span><strong id="tourTitle">—</strong><p id="tourBody">—</p><button id="tourNext" type="button">Continuar</button></div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

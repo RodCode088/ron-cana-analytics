@@ -1,0 +1,12 @@
+{
+  "name": "ron-cana-analytics-lab",
+  "private": true,
+  "scripts": {
+    "cf:dev": "wrangler pages dev",
+    "cf:build-functions": "wrangler pages functions build",
+    "cf:deploy": "wrangler pages deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.126.0"
+  }
+}

@@ -1,10 +1,15 @@
 # analisis_exploratorio.py
 # Análisis exploratorio del dataset de Ron Caña Panamá
 
+import sys
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from datetime import datetime
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 # Configuración de visualización
 sns.set_style('whitegrid')

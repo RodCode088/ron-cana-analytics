@@ -3,3 +3,11 @@ __pycache__/
 .vscode/
 .DS_Store
 *.pbix.bak
+node_modules/
+web/dist/
+.wrangler/
+.dev.vars*
+.env*
+!.env.example
+.pytest_cache/
+coverage/

@@ -1,11 +1,20 @@
 # generador_ventas.py
 # Generador inteligente de transacciones de Ron Caña Panamá
 
-import pandas as pd
-import numpy as np
 import random
+import sys
 from datetime import datetime, timedelta
-from config import *
+
+import numpy as np
+import pandas as pd
+
+try:
+    from .config import *
+except ImportError:  # Permite ejecutar el archivo directamente.
+    from config import *
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 class GeneradorVentasRonCana:
     """
@@ -13,6 +22,8 @@ class GeneradorVentasRonCana:
     """
     
     def __init__(self):
+        random.seed(RANDOM_SEED)
+        np.random.seed(RANDOM_SEED)
         print("🔄 Inicializando generador...")
         
         # Cargar dimensiones
@@ -205,10 +216,10 @@ class GeneradorVentasRonCana:
             descuento_base += random.uniform(0, descuento_max_canal)
         
         # Descuento por volumen (si compra mucho)
-        if cantidad >= 50:
-            descuento_base += 5
-        elif cantidad >= 100:
+        if cantidad >= 100:
             descuento_base += 10
+        elif cantidad >= 50:
+            descuento_base += 5
         
         # Limitar descuento máximo a 30%
         return min(descuento_base, 30)

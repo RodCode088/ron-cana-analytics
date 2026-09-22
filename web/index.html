@@ -10,11 +10,11 @@
   <body>
     <a class="skip-link" href="#workspace">Ir al contenido</a>
     <header class="app-header">
-      <div class="app-brand"><span class="brand-tile">RC</span><strong>Ron Caña Analytics Lab</strong><span class="workspace-name">Clase interactiva</span></div>
+      <div class="app-brand"><strong>Ron Caña Analytics Lab</strong><span class="workspace-name">Clase interactiva</span></div>
       <div class="header-actions">
-        <span class="dataset-badge" id="datasetBadge"><i></i> Cargando datos</span>
+        <span class="dataset-badge" id="datasetBadge">Cargando datos</span>
         <button class="header-button" id="startTourButton" type="button">▶ Iniciar recorrido</button>
-        <button class="header-button primary" id="toggleTutorButton" type="button">✦ Tutor AI</button>
+        <button class="header-button primary" id="toggleTutorButton" type="button">Tutor AI</button>
       </div>
     </header>
 
@@ -144,7 +144,19 @@
       <footer><span>Gemini Free Tier · solo recibe agregados</span><span id="tutorRequestId"></span></footer>
     </aside>
 
-    <div class="tour-popover" id="tourPopover" hidden><span id="tourStep">—</span><strong id="tourTitle">—</strong><p id="tourBody">—</p><button id="tourNext" type="button">Continuar</button></div>
+    <div class="tour-popover" id="tourPopover" hidden><button class="tour-close" id="tourClose" type="button" aria-label="Salir del recorrido">×</button><span id="tourStep">—</span><strong id="tourTitle">—</strong><p id="tourBody">—</p><div class="tour-actions"><button class="tour-back" id="tourBack" type="button">Atrás</button><button id="tourNext" type="button">Continuar</button></div></div>
+
+    <div class="welcome-overlay" id="welcomeOverlay" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+      <div class="welcome-card">
+        <h2 id="welcomeTitle">Hola a todos, bienvenidos a mi proyecto de análisis de datos Ron Caña</h2>
+        <p>Mi nombre es Rodolfo y este proyecto consiste en analizar las ventas de una marca ficticia de ron premium en Panamá. A partir de datos sintéticos, construí un pipeline en Python que genera y valida la información, la organiza en un modelo estrella y la presenta en un tablero interactivo al estilo de Power BI.</p>
+        <p>Aquí podrás explorar los indicadores clave, las ventas por canal, producto y ciudad, revisar el modelo de datos y el código que lo calcula, y hacer tus propios experimentos con nuevos datos.</p>
+        <div class="welcome-actions">
+          <button class="secondary-button" id="welcomeExplore" type="button">Explorar por mi cuenta</button>
+          <button class="action-button" id="welcomeTour" type="button">Iniciar recorrido</button>
+        </div>
+      </div>
+    </div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script type="module" src="/src/main.js"></script>
   </body>

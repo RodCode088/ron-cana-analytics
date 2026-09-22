@@ -28,12 +28,9 @@ button { cursor: pointer; }
 
 .app-header { position: sticky; top: 0; z-index: 40; height: 52px; display: flex; align-items: center; justify-content: space-between; padding: 0 14px; color: white; background: var(--header); box-shadow: 0 1px 4px rgba(0,0,0,.35); }
 .app-brand, .header-actions { display: flex; align-items: center; gap: 10px; }
-.brand-tile { width: 30px; height: 30px; display: grid; place-items: center; color: #111; background: var(--accent); border-radius: 2px; font-size: 11px; font-weight: 700; }
 .app-brand strong { font-size: 14px; font-weight: 600; }
 .workspace-name { padding-left: 10px; color: #c8c6c4; border-left: 1px solid #555; font-size: 12px; }
 .dataset-badge { display: flex; align-items: center; gap: 6px; color: #d2d0ce; font-size: 11px; }
-.dataset-badge i { width: 7px; height: 7px; border-radius: 50%; background: #6bb700; }
-.dataset-badge.custom i { background: var(--accent); }
 .header-button { min-height: 30px; padding: 0 12px; color: white; border: 1px solid #605e5c; border-radius: 2px; background: #323130; font-size: 12px; }
 .header-button:hover { background: #484644; }
 .header-button.primary { color: #111; border-color: var(--accent); background: var(--accent); font-weight: 600; }
@@ -197,7 +194,20 @@ tr:nth-child(even) td { background: #faf9f8; }
 .tour-popover span { color: var(--muted); font-size: 8px; text-transform: uppercase; }
 .tour-popover strong { display: block; margin: 5px 0; font-size: 13px; }
 .tour-popover p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.45; }
-.tour-popover button { float: right; margin-top: 9px; padding: 5px 9px; border: 0; background: var(--accent); font-size: 9px; }
+.tutor-panel.open ~ .tour-popover { right: 400px; }
+.tour-actions { display: flex; justify-content: flex-end; gap: 6px; margin-top: 9px; }
+.tour-actions button { padding: 5px 9px; border: 0; background: var(--accent); font-size: 9px; }
+.tour-actions .tour-back { border: 1px solid var(--line); background: white; }
+.tour-actions button:disabled { opacity: .45; cursor: default; }
+.tour-close { position: absolute; top: 6px; right: 8px; border: 0; background: transparent; color: var(--muted); font-size: 16px; line-height: 1; }
+
+.welcome-overlay { position: fixed; z-index: 120; inset: 0; display: grid; place-items: center; padding: 16px; background: rgba(32,32,32,.72); }
+.welcome-overlay[hidden] { display: none; }
+.welcome-card { width: min(560px, 100%); padding: 28px; border-top: 5px solid var(--accent); background: white; box-shadow: 0 12px 40px rgba(0,0,0,.35); }
+.welcome-card h2 { margin: 0 0 14px; font-size: 20px; line-height: 1.3; }
+.welcome-card p { margin: 0 0 12px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.welcome-actions { display: flex; gap: 10px; margin-top: 18px; }
+.welcome-actions button { margin-top: 0; }
 .tour-highlight { position: relative; z-index: 55 !important; outline: 4px solid var(--accent) !important; box-shadow: 0 0 0 9999px rgba(0,0,0,.25), 0 0 0 5px var(--accent) !important; }
 .toast { position: fixed; z-index: 100; left: 50%; bottom: -60px; transform: translateX(-50%); padding: 9px 14px; color: white; background: #323130; box-shadow: var(--shadow); font-size: 10px; transition: bottom .2s ease; }
 .toast.show { bottom: 18px; }
@@ -233,7 +243,7 @@ tr:nth-child(even) td { background: #faf9f8; }
   .schema-card { grid-column: span 1; }
   .tutor-panel { top: 52px; right: -100%; width: 100%; height: calc(100vh - 106px); }
   .tutor-panel.open { right: 0; }
-  .tour-popover { right: 10px; bottom: 64px; width: calc(100% - 20px); }
+  .tour-popover, .tutor-panel.open ~ .tour-popover { right: 10px; bottom: 64px; width: calc(100% - 20px); }
   .data-toolbar { align-items: stretch; flex-direction: column; }
   .data-toolbar select, .data-toolbar input { width: 100%; }
 }

@@ -495,7 +495,11 @@ function renderLesson(moveInterface = false) {
     $("#tourStep").textContent = `Paso ${state.lessonIndex + 1} de ${LESSONS.length}`;
     $("#tourTitle").textContent = lesson.title;
     $("#tourBody").textContent = lessonBody;
+    $("#tourBack").disabled = state.lessonIndex === 0;
+    $("#tourNext").textContent = state.lessonIndex === LESSONS.length - 1 ? "Finalizar" : "Continuar";
     $("#tourPopover").hidden = false;
+    // El chat solo se abre cuando la lección trata sobre el tutor.
+    $("#tutorPanel").classList.toggle("open", lesson.target === "tutor");
   }
 }
 
@@ -517,8 +521,11 @@ function previousLesson() {
 function startTour() {
   state.lessonIndex = 0;
   state.tourActive = true;
-  $("#tutorPanel").classList.add("open");
   renderLesson(true);
+}
+
+function closeWelcome() {
+  $("#welcomeOverlay").hidden = true;
 }
 
 function stopTour() {
@@ -668,12 +675,7 @@ function updateRows(rows, label, custom = true) {
   configureFilters({ reset: true });
   const datasetBadge = $("#datasetBadge");
   datasetBadge.classList.toggle("custom", custom);
-  datasetBadge.replaceChildren();
-  const statusDot = document.createElement("i");
-  const statusText = document.createTextNode(
-    ` ${label} · ${rows.length.toLocaleString("es-PA")} filas`,
-  );
-  datasetBadge.append(statusDot, statusText);
+  datasetBadge.textContent = `${label} · ${rows.length.toLocaleString("es-PA")} filas`;
   $("#labStatus").textContent = `${label}: ${rows.length.toLocaleString("es-PA")} filas listas para explorar.`;
   state.tablePage = 1;
   renderDashboard();
@@ -704,6 +706,10 @@ function bindEvents() {
   $("#previousLesson").addEventListener("click", previousLesson);
   $("#nextLesson").addEventListener("click", nextLesson);
   $("#tourNext").addEventListener("click", nextLesson);
+  $("#tourBack").addEventListener("click", previousLesson);
+  $("#tourClose").addEventListener("click", () => { stopTour(); $("#tutorPanel").classList.remove("open"); });
+  $("#welcomeTour").addEventListener("click", () => { closeWelcome(); startTour(); });
+  $("#welcomeExplore").addEventListener("click", closeWelcome);
   $("#tutorForm").addEventListener("submit", askTutor);
   $("#tableSelect").addEventListener("change", (event) => selectTable(event.target.value));
   $("#tableSearch").addEventListener("input", (event) => { state.tableSearch = event.target.value.trim().toLowerCase(); state.tablePage = 1; renderDataTable(); });
@@ -739,6 +745,7 @@ function bindEvents() {
   });
   $("#restoreDataButton").addEventListener("click", () => updateRows(state.sourceRows, "Demo original", false));
   document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !$("#welcomeOverlay").hidden) { closeWelcome(); return; }
     if (event.key === "Escape") { $("#tutorPanel").classList.remove("open"); stopTour(); }
   });
 }

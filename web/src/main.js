@@ -664,7 +664,7 @@ async function askTutor(event) {
 
   const actions = applyTutorActions(result.actions);
   addMessage("assistant", `${result.explanation}${result.check_question ? `\n\nComprueba: ${result.check_question}` : ""}`, result.concept, actions);
-  $("#tutorMode").textContent = result.mode === "gemini" ? "Gemini 3.7 Flash" : "Modo guiado local";
+  $("#tutorMode").textContent = result.mode === "gemini" ? `Gemini · ${result.model}` : "Modo guiado local";
   $("#tutorRequestId").textContent = result.request_id ? result.request_id.slice(0, 8) : "local";
   $("#askTutor").disabled = false;
 }

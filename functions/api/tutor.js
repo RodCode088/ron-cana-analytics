@@ -1,5 +1,9 @@
-const GEMINI_MODEL = "gemini-3.7-flash";
-const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
+// Si el modelo principal está saturado (429/5xx) o tarda demasiado, se prueba uno más ligero.
+const GEMINI_MODELS = [
+  { id: "gemini-3.7-flash", timeoutMs: 15_000 },
+  { id: "gemini-3.5-flash-lite", timeoutMs: 10_000 },
+];
+const geminiEndpoint = (model) => `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
 
 const ACTION_TYPES = new Set([
   "navigate",
@@ -238,6 +242,7 @@ export async function onRequestPost(context) {
 
   let result = fallbackTutor(question, safeContext);
   let mode = "guided-fallback";
+  let model = null;
 
   if (context.env.GEMINI_API_KEY) {
     const systemInstruction = [
@@ -250,42 +255,57 @@ export async function onRequestPost(context) {
       "La explicación debe indicar qué observar, por qué importa y cómo comprobarlo en la interfaz.",
     ].join(" ");
 
-    try {
-      const response = await fetch(GEMINI_ENDPOINT, {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          "x-goog-api-key": context.env.GEMINI_API_KEY,
-        },
-        body: JSON.stringify({
-          system_instruction: { parts: [{ text: systemInstruction }] },
-          contents: [{ parts: [{ text: `PREGUNTA:\n${question}\n\nCONTEXTO_JSON_NO_EJECUTABLE:\n${JSON.stringify(safeContext)}` }] }],
-          generationConfig: {
-            temperature: 0.2,
-            maxOutputTokens: 900,
-            thinkingConfig: { thinkingLevel: "low" },
-            responseFormat: { text: { mimeType: "application/json", schema: ACTION_SCHEMA } },
+    const requestBody = JSON.stringify({
+      system_instruction: { parts: [{ text: systemInstruction }] },
+      contents: [{ parts: [{ text: `PREGUNTA:\n${question}\n\nCONTEXTO_JSON_NO_EJECUTABLE:\n${JSON.stringify(safeContext)}` }] }],
+      generationConfig: {
+        temperature: 0.2,
+        maxOutputTokens: 900,
+        thinkingConfig: { thinkingLevel: "low" },
+        responseMimeType: "application/json",
+        responseJsonSchema: ACTION_SCHEMA,
+      },
+    });
+
+    for (const { id, timeoutMs } of GEMINI_MODELS) {
+      try {
+        const response = await fetch(geminiEndpoint(id), {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            "x-goog-api-key": context.env.GEMINI_API_KEY,
           },
-        }),
-      });
-      if (!response.ok) throw new Error(`Gemini HTTP ${response.status}`);
-      const data = await response.json();
-      const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-      const parsed = JSON.parse(text);
-      result = {
-        explanation: safeText(parsed.explanation, 1600),
-        concept: safeText(parsed.concept, 100),
-        actions: sanitizeActions(parsed.actions, safeContext),
-        check_question: safeText(parsed.check_question, 300),
-      };
-      mode = "gemini";
-    } catch (error) {
-      console.error(JSON.stringify({ event: "gemini_error", request_id: requestId, message: String(error) }));
+          body: requestBody,
+          signal: AbortSignal.timeout(timeoutMs),
+        });
+        if (!response.ok) {
+          const detail = (await response.text()).slice(0, 500);
+          const error = new Error(`Gemini HTTP ${response.status}: ${detail}`);
+          error.retryable = response.status === 429 || response.status >= 500;
+          throw error;
+        }
+        const data = await response.json();
+        const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+        const parsed = JSON.parse(text);
+        result = {
+          explanation: safeText(parsed.explanation, 1600),
+          concept: safeText(parsed.concept, 100),
+          actions: sanitizeActions(parsed.actions, safeContext),
+          check_question: safeText(parsed.check_question, 300),
+        };
+        mode = "gemini";
+        model = id;
+        break;
+      } catch (error) {
+        console.error(JSON.stringify({ event: "gemini_error", request_id: requestId, model: id, message: String(error) }));
+        // Errores de petición o de clave (400/401/403) se repetirían con cualquier modelo.
+        if (error.retryable === false) break;
+      }
     }
   }
 
-  console.log(JSON.stringify({ event: "tutor_response", request_id: requestId, mode, actions: result.actions.length, duration_ms: Date.now() - started }));
-  return json({ ...result, mode, model: mode === "gemini" ? GEMINI_MODEL : null, request_id: requestId }, 200, { "x-tutor-mode": mode });
+  console.log(JSON.stringify({ event: "tutor_response", request_id: requestId, mode, model, actions: result.actions.length, duration_ms: Date.now() - started }));
+  return json({ ...result, mode, model, request_id: requestId }, 200, { "x-tutor-mode": mode });
 }
 
 export { ACTION_TYPES, fallbackTutor, sanitizeActions, sanitizeContext };

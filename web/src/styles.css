@@ -71,7 +71,8 @@ button { cursor: pointer; }
 .visual-title > span { color: var(--muted); font-size: 9px; }
 .chart-box { position: relative; height: 245px; }
 .chart-box.tall { height: 260px; }
-#map { height: 260px; border: 1px solid #edebe9; background: #dde5e8; }
+/* Contiene los z-index internos de Leaflet (hasta 1000) para que no tapen modales ni paneles. */
+#map { position: relative; z-index: 0; height: 260px; border: 1px solid #edebe9; background: #dde5e8; }
 .leaflet-container { font-family: "Segoe UI", Arial, sans-serif; font-size: 11px; }
 .map-card { position: relative; }
 
